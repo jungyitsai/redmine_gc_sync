@@ -1,4 +1,5 @@
-class InsertchampsIssue < Redmine::Hook::ViewListener
+# class InsertchampsIssue < Redmine::Hook::ViewListener
+class LivrableDate < Redmine::Hook::ViewListener
 
 	def view_issues_form_details_top(context = {})
 

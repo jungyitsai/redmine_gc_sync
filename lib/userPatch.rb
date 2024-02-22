@@ -1,4 +1,5 @@
-module UserPatchGoogleCalendarMail
+# module UserPatchGoogleCalendarMail
+module Userpatch
 	def self.included(base)
 		base.class_eval do 
 
