@@ -1,7 +1,9 @@
 class LivrableProjectController < ApplicationController
   unloadable
 
-  before_filter :find_project, :authorize, :only => :index
+  # before_filter :find_project, :authorize, :only => :index
+  before_action :find_project, :authorize, :only => :index
+
 
   def index
 

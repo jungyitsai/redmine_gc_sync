@@ -1,20 +1,27 @@
 require 'redmine'
 require 'json'
 require 'dispatcher' unless Rails::VERSION::MAJOR >= 3
-require_dependency 'livrable_date' 
 
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
+
+require_dependency 'livrable_date'
 require_dependency 'issuesPatch'
 require_dependency 'userPatch'
-
 require_dependency 'user_gc_mail'
-
 require_dependency 'houre_patch'
 
-ActionDispatch::Callbacks.to_prepare do
+
+
+
+# ActionDispatch::Callbacks.to_prepare do
+ActiveSupport::Reloader.to_prepare do
 	require_dependency 'issue'
   require_dependency 'user'
-	Issue.send(:include, IssuePatchDeliveryDate)
-  User.send(:include,UserPatchGoogleCalendarMail)
+	# Issue.send(:include, IssuePatchDeliveryDate)
+  Issue.send(:include, Issuespatch)
+  # User.send(:include,UserPatchGoogleCalendarMail)
+  User.send(:include,Userpatch)
 end
 
 Redmine::Plugin.register :redmine_gc_sync do

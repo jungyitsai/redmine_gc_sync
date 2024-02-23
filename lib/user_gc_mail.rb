@@ -1,4 +1,5 @@
-class InsertChampUser < Redmine::Hook::ViewListener
+# class InsertChampUser < Redmine::Hook::ViewListener
+class UserGcMail < Redmine::Hook::ViewListener
 
 	def view_users_form(context = {})
 

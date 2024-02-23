@@ -1,4 +1,5 @@
-module IssuePatchDeliveryDate 
+# module IssuePatchDeliveryDate
+module Issuespatch
 	def self.included(base)
 		base.send(:include, InstanceMethods)
 		base.class_eval do 
