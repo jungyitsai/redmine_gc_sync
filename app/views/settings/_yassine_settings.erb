@@ -16,7 +16,7 @@
   <%= l(:click_link) %>
 </br>
 
-  <% cal = Google::Calendar.new(:client_id => Setting.plugin_redmine_gc_sync['client_id'] , :client_secret => Setting.plugin_redmine_gc_sync['client_secret'] , :calendar => Setting.plugin_redmine_gc_sync['calendar_id'], :redirect_url => "urn:ietf:wg:oauth:2.0:oob") %> 
+  <% cal = Google::Calendar.new(:client_id => Setting.plugin_redmine_gc_sync['client_id'] , :client_secret => Setting.plugin_redmine_gc_sync['client_secret'] , :calendar => Setting.plugin_redmine_gc_sync['calendar_id'], :redirect_url => "#{request.protocol}#{request.host}") %> 
   <a href=<%= cal.authorize_url %> class="button_to_have_refresh_code" target="_blank"> Link<a/>
 <% end %>
 <% else %>
