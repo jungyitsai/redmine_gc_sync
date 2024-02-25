@@ -10,7 +10,7 @@ require_dependency 'issuesPatch'
 require_dependency 'userPatch'
 require_dependency 'user_gc_mail'
 require_dependency 'houre_patch'
-
+require_dependency 'issuehook_listener'
 
 
 
