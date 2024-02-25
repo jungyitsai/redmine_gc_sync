@@ -5,7 +5,7 @@ class IssuehookListener < Redmine::Hook::Listener
     issue = context[:issue]
     project = issue.project
     
-    Rails.logger.info "controller_issues_new_after_save " + issue.to_s
+    # Rails.logger.info "controller_issues_new_after_save " + issue.to_s
 
     curr_issue_event = IssueEvent.new
     curr_issue_event.issue_id = issue.id
@@ -25,7 +25,7 @@ class IssuehookListener < Redmine::Hook::Listener
     curr_issue_event = IssueEvent.find_by(issue_id: issue.id)
     curr_issue_event.send_to_google_calendar
 
-    Rails.logger.info "controller_issues_edit_after_save " + curr_issue_event.event_id
+    # Rails.logger.info "controller_issues_edit_after_save " + curr_issue_event.event_id
     
 
   end
