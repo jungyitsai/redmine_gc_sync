@@ -1,6 +1,6 @@
 require_dependency 'issue'
 
-module IssuePatchA
+module IssuePatch
   def self.included(base)
     base.send(:include, InstanceMethods)
     base.class_eval do
@@ -16,11 +16,14 @@ module IssuePatchA
       issue_id = self.id
 
       # Rails.logger.info "Issue ID: " + issue_id.to_s
-
-      curr_issue_event = IssueEvent.find_by(issue_id: issue_id)
-      cal = get_acces_to_google_calendar
-      event_to_delete = cal.find_event_by_id(curr_issue_event.event_id)
-      cal.delete_event(event_to_delete[0])
+      begin
+        curr_issue_event = IssueEvent.find_by(issue_id: issue_id)
+        cal = get_acces_to_google_calendar
+        event_to_delete = cal.find_event_by_id(curr_issue_event.event_id)
+        cal.delete_event(event_to_delete[0])
+      rescue => e
+        Rails.logger.error "#{e.message}"
+      end
     end
 
     def get_acces_to_google_calendar 

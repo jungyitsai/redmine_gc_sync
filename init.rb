@@ -6,12 +6,12 @@ require 'dispatcher' unless Rails::VERSION::MAJOR >= 3
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
 
 require_dependency 'livrable_date'
-# require_dependency 'issuesPatch'
+# require_dependency 'issuesPatch_X'
 require_dependency 'userPatch'
 require_dependency 'user_gc_mail'
 require_dependency 'houre_patch'
 require_dependency 'issuehook_listener'
-require_dependency 'issue_patch_a'
+require_dependency 'issue_patch'
 
 
 
@@ -26,7 +26,7 @@ ActiveSupport::Reloader.to_prepare do
   User.send(:include,Userpatch)
 end
 
-Issue.send(:include, IssuePatchA)
+Issue.send(:include, IssuePatch)
 
 Redmine::Plugin.register :redmine_gc_sync do
   name 'Redmine Gc Sync plugin'
