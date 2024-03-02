@@ -16,8 +16,9 @@
   <%= l(:click_link) %>
 </br>
 
-  <% cal = Google::Calendar.new(:client_id => Setting.plugin_redmine_gc_sync['client_id'] , :client_secret => Setting.plugin_redmine_gc_sync['client_secret'] , :calendar => Setting.plugin_redmine_gc_sync['calendar_id'], :redirect_url => "#{request.protocol}#{request.host}") %> 
-  <a href=<%= cal.authorize_url %> class="button_to_have_refresh_code" target="_blank"> Link<a/>
+  <% cal = Google::Calendar.new(:client_id => Setting.plugin_redmine_gc_sync['client_id'] , :client_secret => Setting.plugin_redmine_gc_sync['client_secret'] , :calendar => Setting.plugin_redmine_gc_sync['calendar_id'], :redirect_url => "#{request.original_url}") %> 
+  <a href=<%= "#{cal.authorize_url}&prompt=consent" %> class="button_to_have_refresh_code" target="_blank"> Link<a/>
+
 <% end %>
 <% else %>
   <%= l(:fill_blanks) %>
@@ -50,6 +51,7 @@
   <%= content_tag(:label, l(:google_connection_code) )%>
   <%= text_field_tag 'settings[connection_code]', @settings['connection_code'], :size => 50 %>
 </p>
+
 <% end %>
   <br/>
   <p>
@@ -72,8 +74,9 @@ $('.connection_code_block').hide();
 $('.save_again').show();
 
 <% end %>
-<% rescue %>
+<% rescue => e%>
 <h3> <%= l(:error_connection) %> </h3>
+<p><%= e.message %></p>
 <% end %>
 
 <% end %>
